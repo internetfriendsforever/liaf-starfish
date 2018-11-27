@@ -2,7 +2,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 <body>
-  <svg fill='none' width="500px" height="500px" viewBox="0 0 1 1" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <svg style="display: none" width="500px" height="500px" viewBox="0 0 1 1" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <path d="M0.471999559,0.711303419 L0.290331797,0.884084796 C0.259321572,0.913564352 0.210538576,0.878132193 0.229005817,0.839525314 L0.337187283,0.61335476 C0.34605441,0.594830089 0.338835612,0.572606415 0.320775108,0.562828503 L0.100302045,0.443436302 C0.0626872662,0.423069897 0.0813104086,0.365712319 0.123729789,0.371353119 L0.37226512,0.404347545 C0.392606183,0.40705303 0.411499501,0.393344158 0.415237242,0.373167245 L0.460590404,0.126559423 C0.468342961,0.0844801922 0.528620148,0.0844801922 0.53640105,0.126559423 L0.581754213,0.373167245 C0.585491954,0.393344158 0.604385271,0.40705303 0.624726335,0.404347545 L0.873389222,0.371353119 C0.915808602,0.365683974 0.934431744,0.423069897 0.896816965,0.443450475 L0.676343903,0.562828503 C0.658283398,0.572606415 0.6510646,0.594830089 0.659931727,0.61335476 L0.768113193,0.839525314 C0.786537915,0.87811802 0.737783265,0.913564352 0.706787213,0.884084796 L0.525119451,0.711303419 C0.510240993,0.69715034 0.486878017,0.69715034 0.471999559,0.711303419 Z"></path>
   </svg>
 
@@ -12,7 +12,7 @@
     const svg = document.querySelector('svg')
     const path = svg.querySelector('path')
 
-    const instances = 10
+    const instances = 12
     const offsets = []
 
     Array(instances).fill().forEach((v, i) => {
@@ -41,62 +41,102 @@
       extensions: ['angle_instanced_arrays']
     })
 
-    const drawStarfish = regl({
-      vert: `
-        precision mediump float;
-        attribute vec2 position;
-        attribute vec2 offset;
-        uniform float time;
+    let texture
 
-        void main () {
-          vec2 displace = vec2(sin(offset.x * 1.0 + time), sin(offset.x * 8.0 + time)) * 0.1;
-          gl_Position = vec4(position - offset + displace, 0.0, 1.0);
-        }
-      `,
+    const image = new Image()
 
-      frag: `
-        precision mediump float;
+    image.src = 'assets/particle.png'
 
-        void main () {
-          gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
-        }
-      `,
+    image.addEventListener('load', () => {
+      const drawStarfish = regl({
+        vert: `
+          precision mediump float;
+          attribute vec2 position;
+          attribute vec2 offset;
+          varying vec2 uv;
+          uniform float time;
 
-      attributes: {
-        position: [
-          [-0.01, 0],
-          [0, -0.01],
-          [0.01, 0.01]
+          const float size = 0.008;
+
+          void main () {
+            uv = position * 0.5 + 0.5;
+
+            vec2 displace = vec2(0.0);
+
+            displace.x += sin((offset.x + offset.y) * 20.0 + time * 2.0) / 2.0;
+            displace.y += sin(offset.y * 20.0 + time);
+            displace.y += (sin((offset.y - offset.x) * 50.0 + time * 10.0) / 10.0) * sin(time / 10.0) * 2.0;
+
+            displace *= 0.04;
+
+            // displace *= 0.025 + ((sin(time / 10.0) * distance(vec2(0, 0), offset) / 5.0) * 0.5 + 0.5) * 0.1;
+
+            gl_Position = vec4(position * size - offset * 2.0 + displace, 0.0, 1.0);
+          }
+        `,
+
+        frag: `
+          precision mediump float;
+          varying vec2 uv;
+          uniform sampler2D texture;
+
+          void main () {
+            vec4 sample = texture2D(texture, uv);
+            gl_FragColor = sample;
+          }
+        `,
+
+        attributes: {
+          position: [
+            [-1, -1],
+            [-1, 1],
+            [1, 1],
+            [1, -1]
+          ],
+
+          offset: {
+            buffer: regl.buffer({
+              data: offsets,
+              type: 'float',
+              usage: 'static'
+            }),
+            divisor: 2
+          }
+        },
+
+        uniforms: {
+          time: regl.context('time'),
+          texture: regl.texture({
+            data: image,
+            flipY: true
+          })
+        },
+
+        elements: [
+          [0, 1, 2],
+          [2, 3, 0]
         ],
 
-        offset: {
-          buffer: regl.buffer({
-            data: offsets,
-            type: 'float',
-            usage: 'static'
-          }),
-          divisor: 2
+        instances: offsets.length,
+
+        sample: {
+          enable: true,
+          alpha: true,
+          coverage: {
+            value: 1,
+            invert: false
+          }
         }
-      },
-
-      uniforms: {
-        time: regl.context('time')
-      },
-
-      elements: [
-        [0, 1, 2]
-      ],
-
-      instances: offsets.length
-    })
-
-    regl.frame(() => {
-      regl.clear({
-        color: [0, 0, 0, 1],
-        depth: 1
       })
 
-      drawStarfish()
+      regl.frame(() => {
+        regl.clear({
+          color: [0, 0, 0, 1],
+          depth: 1
+        })
+
+        drawStarfish()
+      })
     })
   </script>
 </body>
