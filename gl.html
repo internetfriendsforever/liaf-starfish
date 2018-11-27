@@ -13,7 +13,7 @@
     const path = svg.querySelector('path')
 
     const instances = 10
-    const points = []
+    const offsets = []
 
     Array(instances).fill().forEach((v, i) => {
       const count = Math.floor((i + 1) * 20)
@@ -26,9 +26,7 @@
         const x = (sample.x - 0.5) * scale
         const y = (sample.y - 0.5) * scale
 
-        points.push({
-          position: [x, y]
-        })
+        offsets.push([x, y])
       })
     })
 
@@ -37,16 +35,17 @@
     document.addEventListener('mousemove', event => {
       mouse[0] = event.clientX / window.innerWidth
       mouse[1] = event.clientY / window.innerWidth
-
     })
 
-    const regl = createREGL()
+    const regl = createREGL({
+      extensions: ['angle_instanced_arrays']
+    })
 
-    const drawPoint = regl({
+    const drawStarfish = regl({
       vert: `
         precision mediump float;
         attribute vec2 position;
-        uniform vec2 offset;
+        attribute vec2 offset;
         uniform float time;
 
         void main () {
@@ -68,17 +67,27 @@
           [-0.01, 0],
           [0, -0.01],
           [0.01, 0.01]
-        ]
+        ],
+
+        offset: {
+          buffer: regl.buffer({
+            data: offsets,
+            type: 'float',
+            usage: 'static'
+          }),
+          divisor: 2
+        }
       },
 
       uniforms: {
-        offset: regl.prop('position'),
         time: regl.context('time')
       },
 
       elements: [
         [0, 1, 2]
-      ]
+      ],
+
+      instances: offsets.length
     })
 
     regl.frame(() => {
@@ -87,7 +96,7 @@
         depth: 1
       })
 
-      drawPoint(points)
+      drawStarfish()
     })
   </script>
 </body>
