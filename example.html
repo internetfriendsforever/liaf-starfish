@@ -1,0 +1,50 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>Starfish usage example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <style>
+      body {
+        background: #e5e5e5;
+        font-size: 300%;
+      }
+
+      #starfish {
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Heading</h1>
+
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales nisi a est porta, id imperdiet enim mollis. Quisque consequat eleifend orci id pellentesque. Aenean at ipsum sit amet eros fermentum vehicula. In odio quam, sodales non interdum quis, convallis a eros. Maecenas ipsum orci, dictum a turpis eu, viverra faucibus lorem. Etiam eu placerat tellus. Fusce quis sem nibh. Phasellus egestas sem sed justo pretium, vitae tincidunt sapien suscipit. Proin lacus nisi, bibendum quis egestas non, fringilla ac augue. Vivamus cursus lobortis sem, eu egestas tortor condimentum at. Sed condimentum blandit eros id accumsan.
+    </p>
+
+    <h1>Heading</h1>
+
+    <p>
+      In bibendum urna et odio feugiat fermentum. Sed rhoncus aliquam ex eget elementum. Phasellus accumsan velit at erat gravida, id pellentesque augue semper. Suspendisse sit amet lectus id elit condimentum tempor. Mauris eget diam nec diam finibus sagittis. Morbi fermentum aliquam tincidunt. Integer quis nunc metus. Donec vel risus dolor. Cras sapien nibh, accumsan id auctor quis, volutpat nec nisi. Praesent eu odio feugiat arcu dapibus viverra at id tortor. Nullam et lectus non diam venenatis posuere id eget erat.
+    </p>
+
+    <div id='starfish'></div>
+
+    <script src='starfish.js'></script>
+    <script>
+      var container = document.getElementById('starfish')
+
+      starfish(container, {
+        zoom: 1,
+        pan: [0, 0]
+      })
+    </script>
+  </body>
+</html>
