@@ -6,6 +6,7 @@
   "main": "starfish.js",
   "scripts": {
     "build": "rollup -c",
+    "build-min": "rollup -c rollup.config.min.js",
     "dev": "http-server -c-1 & rollup -c -w"
   },
   "repository": {
@@ -18,11 +19,17 @@
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
+    "@babel/plugin-transform-arrow-functions": "^7.0.0",
+    "@babel/plugin-transform-block-scoping": "^7.1.5",
+    "@babel/plugin-transform-destructuring": "^7.1.3",
+    "@babel/plugin-transform-parameters": "^7.1.0",
+    "@babel/plugin-transform-template-literals": "^7.0.0",
     "@timdp/rollup-plugin-image": "^1.0.3",
     "http-server": "^0.11.1",
     "rollup": "^0.67.3",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-node-resolve": "^3.4.0"
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-uglify": "^6.0.0"
   }
 }
