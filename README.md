@@ -4,23 +4,22 @@ Starfish graphic for Lofoten International Art Festival
 ## Usage
 
 ```javascript
-starfish(document.getElementById('starfish'))
+starfish()
 ```
 
 See working example in `dist` folder
 
 ## API
 
-### starfish(element, [options])
-
-#### element
-
-Type: `Node`
+### starfish([options])
 
 #### options
 
 Type: `Object`
 
+* `container` – Type `Node`
+* `texture` – Type `Image`
+* `scale` – Type: `Number`, Default: `1`
 * `zoom` – Type: `Number`, Default: `1`
 * `pan` – Type: `Array`, Default: `[0, 0]`
 * `instances` – Type: `Number`, Default: `12`

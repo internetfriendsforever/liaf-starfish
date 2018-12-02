@@ -39,9 +39,9 @@
 
     <script src='starfish.js'></script>
     <script>
-      var container = document.getElementById('starfish')
-
-      starfish(container, {
+      starfish({
+        container: document.getElementById('starfish'),
+        texture: './particle.png',
         zoom: 1,
         pan: [0, 0]
       })

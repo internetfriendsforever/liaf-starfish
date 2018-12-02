@@ -9788,85 +9788,98 @@ var starfish = (function () {
 	  str: str_1
 	};
 
-	var img = new Image(); img.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsSAAALEgHS3X78AAAD/klEQVR42uWbz5LiVBTGvwTbcTVkXOgs/MNYuu72CTo+QecNhjew38CoG0s3zNrSoqdmllbTT9CwH2votdrDNC7UBQarIYTcez4X3pSAQ9NAQJKcqhSh+Jffl+/ec7n3XIskNhgOgAMArnmsANhf8JkWgABAG0DTHBsLawMCOACqADwAhyl95xmAhjmCXRXANeAPN3W3SPaNCL5lWZ1dEcAF4Kd4t+fBv6qpVNcVwl7T6nUA5/8DPMxvvhCRmog423aAZ+DL2HDcdH0Tr/VJeqVSqbkNB9QBnO4QPEiWAZxrrWubdIBjUtI+thBLwM+et0h4e3uvBWk6oJIReJA4JNgcx7GTlgMODHw5A/AgknNekHTfuHMnWMcBzrY6u5ThQXIfZDMMQ2cdAbJi+1l4wIhAsr6qAPWMwyfH0fX1wF+2D/BMqss6/D/vISEiH5fLd9u3EcAB0NmxPL8uPITykuTBm/fuBYuaQC2H8CD5vgiPFznANWP7vMFDxDwXeXD/7bc68xzg5xweFPHnOeAAwPOcw0NIaK0fvPfuO51ZBxwXBB5a/+uCxAEOgD8LAg8R3Rdh5aMPPwjsibxfFHiIsKy18iabgFcgeGitoLWeEuCoYPDQWrtJH5B67s8APJTSEJFPbDP4KSI8lFKubfJ/EeGhlKrYJgUWER6xUhWLKayMZBQecRyvtTCSeXit9HoCZB0+Vms4IA/w4/GKAuQFfjweLy9AnuC1XrIPyBt8FEW3FyCP8EkTaBUVPoqilm2mwIsIj3EUBTcKkHN4xEq1bcwpQysAPKLRqJnMCQaTiyEFgceXX3xm2ROrwIWCH43Cs8kpsUbB4BGGYWNKAFOEWBR4DIfDKQGCxAUFgT/5/rtvg9mVIb8g8IiiqPafxVFTcnpSAPjW0yeP2zeuDucYHsPBdLnMlACWZXVIPsox/Mnp6Q/NRRUiPoCXOYTv93q944VVYrZtBySrOYNHr9ertlrnwa3K5EzV9ec5gj9ptc4bS9UJlkolH8BZDuAvut2r42XrBAEAcawcgk0A+xmGdy8vfwlWqRSFKTl3TeFx1uD73e5V9Sb4hQIAwOt7ewFJF0aEjN359iK+W2+YCMPQIdkgeZh1268kQBLX14MayU93uLevLsOz0qapfv8vVygNkuUdGuRU56W6tfqAV0W5fLdJsiLCR7swvO31epVV4Fd2wGT89vsfFYr4Qj7c9r+64WDgz47tty5AElfdXytaiy+iPVOHt7HJjCiK6k+fPG6mcd2pb57+6edLR2vlaa09rfVRWhOYYRg2hsNhI5nJSSusDW+fx7Mfn7tKKVcpdRAr5cRxfLgA/mIcRZ1YqXY0GjVHo7D9zddfBZu6vr8B4nD5yl23XHoAAAAASUVORK5CYII=';
-
-	var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-	path.setAttribute('d', 'M0.471999559,0.711303419 L0.290331797,0.884084796 C0.259321572,0.913564352 0.210538576,0.878132193 0.229005817,0.839525314 L0.337187283,0.61335476 C0.34605441,0.594830089 0.338835612,0.572606415 0.320775108,0.562828503 L0.100302045,0.443436302 C0.0626872662,0.423069897 0.0813104086,0.365712319 0.123729789,0.371353119 L0.37226512,0.404347545 C0.392606183,0.40705303 0.411499501,0.393344158 0.415237242,0.373167245 L0.460590404,0.126559423 C0.468342961,0.0844801922 0.528620148,0.0844801922 0.53640105,0.126559423 L0.581754213,0.373167245 C0.585491954,0.393344158 0.604385271,0.40705303 0.624726335,0.404347545 L0.873389222,0.371353119 C0.915808602,0.365683974 0.934431744,0.423069897 0.896816965,0.443450475 L0.676343903,0.562828503 C0.658283398,0.572606415 0.6510646,0.594830089 0.659931727,0.61335476 L0.768113193,0.839525314 C0.786537915,0.87811802 0.737783265,0.913564352 0.706787213,0.884084796 L0.525119451,0.711303419 C0.510240993,0.69715034 0.486878017,0.69715034 0.471999559,0.711303419 Z');
-	function starfish (container) {
-	  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+	function starfish () {
+	  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+	      container = _ref.container,
+	      _ref$texture = _ref.texture,
+	      texture = _ref$texture === void 0 ? 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAAAtJREFUCB1j+A8EAAn7A/0Mu1vnAAAAAElFTkSuQmCC' : _ref$texture,
 	      _ref$zoom = _ref.zoom,
 	      zoom = _ref$zoom === void 0 ? 1 : _ref$zoom,
+	      _ref$scale = _ref.scale,
+	      scale = _ref$scale === void 0 ? 1 : _ref$scale,
 	      _ref$pan = _ref.pan,
 	      pan = _ref$pan === void 0 ? [0, 0] : _ref$pan,
 	      _ref$instances = _ref.instances,
 	      instances = _ref$instances === void 0 ? 12 : _ref$instances,
-	      _ref$count = _ref.count;
+	      _ref$count = _ref.count,
+	      _ref$path = _ref.path,
+	      path = _ref$path === void 0 ? 'M0.471999559,0.711303419 L0.290331797,0.884084796 C0.259321572,0.913564352 0.210538576,0.878132193 0.229005817,0.839525314 L0.337187283,0.61335476 C0.34605441,0.594830089 0.338835612,0.572606415 0.320775108,0.562828503 L0.100302045,0.443436302 C0.0626872662,0.423069897 0.0813104086,0.365712319 0.123729789,0.371353119 L0.37226512,0.404347545 C0.392606183,0.40705303 0.411499501,0.393344158 0.415237242,0.373167245 L0.460590404,0.126559423 C0.468342961,0.0844801922 0.528620148,0.0844801922 0.53640105,0.126559423 L0.581754213,0.373167245 C0.585491954,0.393344158 0.604385271,0.40705303 0.624726335,0.404347545 L0.873389222,0.371353119 C0.915808602,0.365683974 0.934431744,0.423069897 0.896816965,0.443450475 L0.676343903,0.562828503 C0.658283398,0.572606415 0.6510646,0.594830089 0.659931727,0.61335476 L0.768113193,0.839525314 C0.786537915,0.87811802 0.737783265,0.913564352 0.706787213,0.884084796 L0.525119451,0.711303419 C0.510240993,0.69715034 0.486878017,0.69715034 0.471999559,0.711303419 Z' : _ref$path;
 
-	  var offsets = [];
-
-	  for (var i = 0; i < instances; i++) {
-	    var _count = Math.floor((i + 1) * 20);
-
-	    var scale = (i + 1) / instances;
-
-	    for (var k = 0; k < _count; k++) {
-	      var length = path.getTotalLength();
-	      var distance = k / _count * length;
-	      var sample = path.getPointAtLength(distance);
-	      var x = (sample.x - 0.5) * scale;
-	      var y = (sample.y - 0.5) * scale;
-	      offsets.push([x, y]);
-	    }
-	  }
-
-	  var regl$$1 = regl({
-	    container: container,
-	    extensions: ['angle_instanced_arrays']
+	  var image = new window.Image();
+	  image.src = texture;
+	  image.addEventListener('load', function () {
+	    start();
 	  });
-	  var drawStarfish = regl$$1({
-	    vert: "\n      precision mediump float;\n      attribute vec2 position;\n      attribute vec2 offset;\n      varying vec2 uv;\n      uniform float time;\n      uniform mat4 model, view, projection;\n\n      const float size = 0.008;\n\n      void main () {\n        uv = position * 0.5 + 0.5;\n\n        vec2 displace = vec2(0.0);\n\n        displace.x += sin((offset.x + offset.y) * 20.0 + time * 2.0) / 2.0;\n        displace.y += sin(offset.y * 20.0 + time);\n        displace.y += (sin((offset.y - offset.x) * 50.0 + time * 10.0) / 10.0) * sin(time / 10.0) * 2.0;\n\n        displace *= 0.04;\n\n        gl_Position = projection * view * model * vec4(position * size - offset * 2.0 + displace, 0.0, 1.0);\n      }\n    ",
-	    frag: "\n      precision mediump float;\n      varying vec2 uv;\n      uniform sampler2D texture;\n\n      void main () {\n        vec4 sample = texture2D(texture, uv);\n        gl_FragColor = sample;\n      }\n    ",
-	    attributes: {
-	      position: [[-1, -1], [-1, 1], [1, 1], [1, -1]],
-	      offset: {
-	        buffer: regl$$1.buffer({
-	          data: offsets,
-	          type: 'float',
-	          usage: 'static'
-	        }),
-	        divisor: 2
-	      }
-	    },
-	    uniforms: {
-	      time: regl$$1.context('time'),
-	      texture: regl$$1.texture({
-	        data: img,
-	        flipY: true
-	      }),
-	      model: glMat4.translate([], glMat4.identity([]), [-pan[0], -pan[1], 0]),
-	      view: glMat4.lookAt([], [0, 0, 2 / zoom], [0, 0, 0], [0, 1, 0]),
-	      projection: function (context) {
-	        return glMat4.perspective([], Math.PI / 4, context.viewportWidth / context.viewportHeight, 0.01, 1000);
-	      }
-	    },
-	    elements: [[0, 1, 2], [2, 3, 0]],
-	    instances: offsets.length,
-	    sample: {
-	      enable: true,
-	      alpha: true,
-	      coverage: {
-	        value: 1,
-	        invert: false
+
+	  function start() {
+	    var pathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+	    pathElement.setAttribute('d', path);
+	    var offsets = [];
+
+	    for (var i = 0; i < instances; i++) {
+	      var _count = Math.floor((i + 1) * 20);
+
+	      var _scale = (i + 1) / instances;
+
+	      for (var k = 0; k < _count; k++) {
+	        var length = pathElement.getTotalLength();
+	        var distance = k / _count * length;
+	        var sample = pathElement.getPointAtLength(distance);
+	        var x = (sample.x - 0.5) * _scale;
+	        var y = (sample.y - 0.5) * _scale;
+	        offsets.push([x, y]);
 	      }
 	    }
-	  });
-	  regl$$1.frame(function () {
-	    regl$$1.clear({
-	      color: [0, 0, 0, 0],
-	      depth: 1
+
+	    var regl$$1 = regl({
+	      container: container,
+	      extensions: ['angle_instanced_arrays']
 	    });
-	    drawStarfish();
-	  });
+	    var drawStarfish = regl$$1({
+	      vert: "\n        precision mediump float;\n        attribute vec2 position;\n        attribute vec2 offset;\n        varying vec2 uv;\n        uniform float time;\n        uniform mat4 model, view, projection;\n\n        const float size = 0.008 * ".concat(scale.toFixed(1), ";\n\n        void main () {\n          uv = position * 0.5 + 0.5;\n\n          vec2 displace = vec2(0.0);\n\n          displace.x += sin((offset.x + offset.y) * 20.0 + time * 2.0) / 2.0;\n          displace.y += sin(offset.y * 20.0 + time);\n          displace.y += (sin((offset.y - offset.x) * 50.0 + time * 10.0) / 10.0) * sin(time / 10.0) * 2.0;\n\n          displace *= 0.04;\n\n          gl_Position = projection * view * model * vec4(position * size - offset * 2.0 + displace, 0.0, 1.0);\n        }\n      "),
+	      frag: "\n        precision mediump float;\n        varying vec2 uv;\n        uniform sampler2D texture;\n\n        void main () {\n          vec4 sample = texture2D(texture, uv);\n          gl_FragColor = sample;\n        }\n      ",
+	      attributes: {
+	        position: [[-1, -1], [-1, 1], [1, 1], [1, -1]],
+	        offset: {
+	          buffer: regl$$1.buffer({
+	            data: offsets,
+	            type: 'float',
+	            usage: 'static'
+	          }),
+	          divisor: 2
+	        }
+	      },
+	      uniforms: {
+	        time: regl$$1.context('time'),
+	        texture: regl$$1.texture({
+	          data: image || [1, 1, 1, 1],
+	          flipY: true
+	        }),
+	        model: glMat4.translate([], glMat4.identity([]), [-pan[0], -pan[1], 0]),
+	        view: glMat4.lookAt([], [0, 0, 2 / zoom], [0, 0, 0], [0, 1, 0]),
+	        projection: function (context) {
+	          return glMat4.perspective([], Math.PI / 4, context.viewportWidth / context.viewportHeight, 0.01, 1000);
+	        }
+	      },
+	      elements: [[0, 1, 2], [2, 3, 0]],
+	      instances: offsets.length,
+	      sample: {
+	        enable: true,
+	        alpha: true,
+	        coverage: {
+	          value: 1,
+	          invert: false
+	        }
+	      }
+	    });
+	    regl$$1.frame(function () {
+	      regl$$1.clear({
+	        color: [0, 0, 0, 0],
+	        depth: 1
+	      });
+	      drawStarfish();
+	    });
+	  }
 	}
 
 	return starfish;
