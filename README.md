@@ -1,13 +1,13 @@
 # liaf-starfish
 Starfish graphic for Lofoten International Art Festival
 
-## Usage:
-
-See example in `dist` folder
+## Usage
 
 ```javascript
 starfish(document.getElementById('starfish'))
 ```
+
+See working example in `dist` folder
 
 ## API
 
